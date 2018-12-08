@@ -10,7 +10,7 @@ $factory->define(\App\Models\Comment::class, function (Faker $faker) {
     $users = \App\User::all();
 
     /** @var array $foreign_keys */
-    $foreign_keys = getForeignKeysByCommentFactory($articles, $users);
+    $foreign_keys = getForeignKeysForCommentFactory($articles, $users);
 
     return [
         'article_id' => $foreign_keys['article_id'],
@@ -24,7 +24,7 @@ $factory->define(\App\Models\Comment::class, function (Faker $faker) {
  * @param \Illuminate\Database\Eloquent\Collection $users
  * @return array
  */
-function getForeignKeysByCommentFactory(
+function getForeignKeysForCommentFactory(
     \Illuminate\Database\Eloquent\Collection $articles,
     \Illuminate\Database\Eloquent\Collection $users
 ): array
@@ -37,7 +37,7 @@ function getForeignKeysByCommentFactory(
         ->exists();
 
     if ($is_exists) {
-        getForeignKeysByCommentFactory($articles, $users);
+        getForeignKeysForCommentFactory($articles, $users);
     } else {
         return [
             'article_id' => $article_id,

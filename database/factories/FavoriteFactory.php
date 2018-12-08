@@ -8,7 +8,7 @@ $factory->define(\App\Models\Favorite::class, function () {
     $users = \App\User::all();
 
     /** @var array $foreign_keys */
-    $foreign_keys = getForeignKeysByFavoriteFactory($comments, $users);
+    $foreign_keys = getForeignKeysForFavoriteFactory($comments, $users);
 
     return [
         'comment_id' => $foreign_keys['comment_id'],
@@ -21,7 +21,7 @@ $factory->define(\App\Models\Favorite::class, function () {
  * @param \Illuminate\Database\Eloquent\Collection $users
  * @return array
  */
-function getForeignKeysByFavoriteFactory(
+function getForeignKeysForFavoriteFactory(
     \Illuminate\Database\Eloquent\Collection $comments,
     \Illuminate\Database\Eloquent\Collection $users
 ): array
@@ -34,7 +34,7 @@ function getForeignKeysByFavoriteFactory(
         ->exists();
 
     if ($is_exists) {
-        getForeignKeysByFavoriteFactory($comments, $users);
+        getForeignKeysForFavoriteFactory($comments, $users);
     } else {
         return [
             'comment_id' => $comment_id,
