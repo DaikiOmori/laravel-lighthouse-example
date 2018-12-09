@@ -2,7 +2,7 @@ extend type Query {
     users: [User!]! @paginate(type: "paginator" model: "App\\User")
     user(id: ID @eq): User @find(model: "App\\User")
     usersByEmail(email: String @where(operator: "like")): [User!]!
-    @paginate(type: "paginator" model: "App\\User")
+        @paginate(type: "paginator" model: "App\\User")
 }
 
 extend type Mutation {
@@ -21,7 +21,10 @@ extend type Mutation {
     @create(model: "App\\User")
     updateUser(
         id: ID
-            @rules(apply: ["required"])
+            @rules(
+                apply: ["required"],
+                messages: { required: "idは必須です" }
+            )
         name: String
         email: String
             @rules(apply: ["email"])
@@ -34,7 +37,7 @@ extend type Mutation {
     deleteUsersByEmail(
         email: String!  @rules(apply: ["required"])
     ): DummyResponse
-        @field(resolver: "App\\Http\\GraphQL\\Mutations\\DeleteUsersByEmail@handle")
+        @field(resolver: "App\\Http\\GraphQL\\Mutations\\DeleteUsersByEmail@resolve")
 }
 
 type DummyResponse {
