@@ -40,4 +40,9 @@ extend type Mutation {
         email: String!  @rules(apply: ["required"])
     ): DummyResponse
         @field(resolver: "App\\Http\\GraphQL\\Mutations\\DeleteUsersByEmail@resolve")
+    createUsers(
+        users: Users
+    ): DummyResponse
+    @field(resolver: "App\\Http\\GraphQL\\Mutations\\CreateUsers@resolve")
+
 }
