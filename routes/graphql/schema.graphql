@@ -2,5 +2,4 @@
 type Query
 type Mutation
 
-#import types/*.graphql
 #import models/*.graphql

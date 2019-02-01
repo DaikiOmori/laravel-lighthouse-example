@@ -1,4 +1,4 @@
-#import ../types//*.graphql
+#import ../types/*.graphql
 
 extend type Query {
     users: [User!]! @paginate(type: "paginator" model: "App\\User")
