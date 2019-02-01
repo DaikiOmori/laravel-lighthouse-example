@@ -1,3 +1,5 @@
+#import ../types//*.graphql
+
 extend type Query {
     users: [User!]! @paginate(type: "paginator" model: "App\\User")
     user(id: ID @eq): User @find(model: "App\\User")
@@ -39,27 +41,3 @@ extend type Mutation {
     ): DummyResponse
         @field(resolver: "App\\Http\\GraphQL\\Mutations\\DeleteUsersByEmail@resolve")
 }
-
-type DummyResponse {
-    res: String!
-}
-
-type User {
-    id: ID!
-    name: String!
-    email: String!
-    password: String!
-    articles: [Article] @hasMany
-    createdAt: DateTime! @rename(attribute: created_at)
-    updatedAt: DateTime! @rename(attribute: updated_at)
-}
-
-type Article {
-    id: ID!
-    userId: Int! @rename(attribute: user_id)
-    title: String!
-    body: String!
-    createdAt: DateTime! @rename(attribute: created_at)
-    updatedAt: DateTime! @rename(attribute: updated_at)
-}
-

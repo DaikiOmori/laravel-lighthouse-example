@@ -1,0 +1,30 @@
+"A datetime string with format 'Y-m-d H:i:s', e.g. '2018-01-01 13:00:00'."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"A date string with format 'Y-m-d', e.g. '2011-05-23'."
+scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
+
+type DummyResponse {
+    res: String!
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    password: String!
+    avatar: String!
+    articles: [Article] @hasMany
+    createdAt: DateTime! @rename(attribute: created_at)
+    updatedAt: DateTime! @rename(attribute: updated_at)
+}
+
+type Article {
+    id: ID!
+    userId: Int! @rename(attribute: user_id)
+    title: String!
+    body: String!
+    createdAt: DateTime! @rename(attribute: created_at)
+    updatedAt: DateTime! @rename(attribute: updated_at)
+}
+
