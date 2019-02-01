@@ -22,13 +22,13 @@ extend type Mutation {
     ): User
     @create(model: "App\\User")
     updateUser(
-        id: ID
+        id: ID!
             @rules(
                 apply: ["required"],
                 messages: { required: "idは必須です" }
             )
-        name: String
-        email: String
+        name: String!
+        email: String!
             @rules(apply: ["email"])
     ): User
         @update(model: "App\\User")
